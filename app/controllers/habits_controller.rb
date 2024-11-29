@@ -3,7 +3,8 @@ class HabitsController < ApplicationController
 
   # GET /habits
   def index
-    @habits = Habit.all
+    @good_habits = Habit.good
+    @bad_habits = Habit.bad
   end
 
   # GET /habits/1
@@ -24,7 +25,7 @@ class HabitsController < ApplicationController
     @habit = Habit.new(habit_params)
 
     if @habit.save
-      redirect_to @habit, notice: "Habit was successfully created."
+      redirect_to action: :index
     else
       render :new, status: :unprocessable_entity
     end

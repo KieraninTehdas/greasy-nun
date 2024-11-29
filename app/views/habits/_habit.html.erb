@@ -1,12 +1,5 @@
-<div id="<%= dom_id habit %>">
-  <p>
-    <strong>Name:</strong>
-    <%= habit.name %>
+<div id="<%= dom_id habit %>" class="rounded-lg border border-lime-500">
+  <p class="m-1 text-justify">
+    <%= link_to habit.name, habit %>
   </p>
-
-  <p>
-    <strong>Start:</strong>
-    <%= habit.start %>
-  </p>
-
 </div>

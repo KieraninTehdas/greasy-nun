@@ -10,16 +10,22 @@
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  
+  <div class="flex space-x-2">
+    <div>
+      <%= form.label :start, "I want to" %>
+    </div>
+    <div>
+      <%= form.select :start, options_for_select([["Start", true], ["Stop", false]]) %>
+    </div>
+    <div>
+      <%= form.text_field :name, placeholder: "a habit" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :start, style: "display: block" %>
-    <%= form.check_box :start %>
-  </div>
+    
+
+  
 
   <div>
     <%= form.submit %>

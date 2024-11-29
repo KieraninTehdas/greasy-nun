@@ -2,15 +2,26 @@
 
 <% content_for :title, "Habits" %>
 
-<h1>Habits</h1>
+<h1>I want to</h1>
 
-<div id="habits">
-  <% @habits.each do |habit| %>
-    <%= render habit %>
-    <p>
-      <%= link_to "Show this habit", habit %>
-    </p>
-  <% end %>
+<div id="habits" class="flex justify-evenly mx-5 sm:flex-row flex-col">
+  <div class="w-1/2">
+    <h2>Start</h2>
+    <div class="flex space-x-4">
+      <% @good_habits.each do |habit| %>
+        <%= render habit %>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="w-1/2">
+    <h2>Stop</h2>
+    <div class="flex space-x-4">
+      <% @bad_habits.each do |habit| %>
+        <%= render habit %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 <%= link_to "New habit", new_habit_path %>
