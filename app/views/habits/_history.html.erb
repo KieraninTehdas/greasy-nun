@@ -1,0 +1,22 @@
+<div>
+  <div class="flex m-6">
+    <% @recent_history.each do |tracking_point| %>
+      <div class="flex flex-col grow place-items-center">
+        <div>
+          <%= tracking_point.date_time_point.to_date %>
+        </div>
+        <div>
+          <% if tracking_point.has_data? %>
+            <% if tracking_point.succeeded? %>
+              Tick
+            <% else %>
+              Cross
+            <% end %>
+          <% else %>
+            ?
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
