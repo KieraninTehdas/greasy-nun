@@ -1,15 +1,19 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the HabitsHelper. For example:
-#
-# describe HabitsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe HabitsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#habit_text" do
+    subject { helper.habit_text(habit) }
+
+    context "when habit is good :)" do
+      let(:habit) { Habit.new(name: "Running every day", start: true) }
+
+      it { is_expected.to eq("I want to start running every day") }
+    end
+
+    context "when habit is bad :(" do
+      let(:habit) { Habit.new(name: "Running every day", start: false) }
+
+      it { is_expected.to eq("I want to stop running every day") }
+    end
+  end
 end

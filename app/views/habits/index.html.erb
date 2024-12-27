@@ -9,16 +9,24 @@
     <h2>Start</h2>
     <div class="flex space-x-4">
       <% @good_habits.each do |habit| %>
-        <%= render habit %>
+        <div id="<%= dom_id habit %>" class="rounded-lg border border-lime-500">
+          <p class="m-1 text-justify">
+            <%= link_to habit.name.downcase, habit %>
+          </p>
+        </div>
       <% end %>
     </div>
   </div>
-  
+
   <div class="w-1/2">
     <h2>Stop</h2>
     <div class="flex space-x-4">
       <% @bad_habits.each do |habit| %>
-        <%= render habit %>
+        <div id="<%= dom_id habit %>" class="rounded-lg border border-red-500">
+          <p class="m-1 text-justify">
+            <%= link_to habit.name.downcase, habit %>
+          </p>
+        </div>
       <% end %>
     </div>
   </div>
