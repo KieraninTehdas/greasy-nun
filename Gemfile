@@ -16,6 +16,8 @@ gem "turbo-rails"
 gem "stimulus-rails"
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem "cssbundling-rails"
+
+gem "inline_svg"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
