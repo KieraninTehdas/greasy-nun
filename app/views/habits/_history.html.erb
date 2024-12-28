@@ -8,12 +8,12 @@
         <div>
           <% if tracking_point.has_data? %>
             <% if tracking_point.succeeded? %>
-              Tick
+              <%= render_icon("check") %>
             <% else %>
-              Cross
+              <%= render_icon("x") %>
             <% end %>
           <% else %>
-            ?
+            <%= render_icon("help-circle") %>
           <% end %>
         </div>
       </div>
