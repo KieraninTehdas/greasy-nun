@@ -13,7 +13,6 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/habits", type: :request do
-  
   # This should return the minimal set of attributes required to create a valid
   # Habit. As you add validations to Habit, be sure to
   # adjust the attributes here as well.

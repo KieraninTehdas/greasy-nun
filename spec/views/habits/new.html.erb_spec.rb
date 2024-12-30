@@ -12,7 +12,6 @@ RSpec.describe "habits/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", habits_path, "post" do
-
       assert_select "input[name=?]", "habit[name]"
 
       assert_select "input[name=?]", "habit[start]"
