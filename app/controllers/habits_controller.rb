@@ -1,5 +1,5 @@
 class HabitsController < ApplicationController
-  before_action :set_habit, only: %i[ show edit update destroy ]
+  before_action :set_habit, only: %i[ show edit update destroy cycle_status ]
 
   # GET /habits
   def index
@@ -45,6 +45,16 @@ class HabitsController < ApplicationController
   def destroy
     @habit.destroy!
     redirect_to habits_url, notice: "Habit was successfully destroyed.", status: :see_other
+  end
+
+  def cycle_status
+    tracking_point = @habit.tracking_points.find_or_create_by(
+      date_time_point: params[:date_time_point].to_datetime
+    ) do |tracking_point|
+      tracking_point.succeeded = false
+    end
+
+    tracking_point.update!(succeeded: !tracking_point.succeeded?)
   end
 
   private

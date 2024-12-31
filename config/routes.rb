@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   get "tracking_points/create"
   get "tracking_points/edit"
   get "tracking_points/update"
-  resources :habits
+  resources :habits do
+    member do
+      post "cycle_status"
+    end
+  end
+
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
