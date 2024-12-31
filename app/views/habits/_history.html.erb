@@ -6,9 +6,7 @@
           <%= tracking_point.date_time_point.to_date %>
         </div>
         <div>
-          <%= turbo_frame_tag tracking_point.date_time_point.to_date do %>
-            <%= render "status", tracking_point: tracking_point %>
-          <% end %>
+          <%= render "status", tracking_point: tracking_point %>
 
         </div>
       </div>
