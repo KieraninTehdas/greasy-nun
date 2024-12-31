@@ -7,9 +7,7 @@
         </div>
         <div>
           <%= turbo_frame_tag tracking_point.date_time_point.to_date do %>
-            <%= button_to cycle_status_habit_path(@habit), method: :post, params: { date_time_point: tracking_point.date_time_point.to_date } do %>
-              <%= render_icon(status_icon(tracking_point)) %>
-            <% end %>
+            <%= render "status", tracking_point: tracking_point %>
           <% end %>
 
         </div>

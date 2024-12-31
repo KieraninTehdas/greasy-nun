@@ -48,13 +48,18 @@ class HabitsController < ApplicationController
   end
 
   def cycle_status
-    tracking_point = @habit.tracking_points.find_or_create_by(
+    @tracking_point = @habit.tracking_points.find_or_create_by(
       date_time_point: params[:date_time_point].to_datetime
     ) do |tracking_point|
       tracking_point.succeeded = false
     end
 
-    tracking_point.update!(succeeded: !tracking_point.succeeded?)
+    @tracking_point.update!(succeeded: !@tracking_point.succeeded?)
+
+    respond_to do |format|
+      format.html { redirect_to habit_path(@habit) }
+      format.turbo_stream
+    end
   end
 
   private

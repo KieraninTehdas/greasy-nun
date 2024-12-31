@@ -1,0 +1,5 @@
+<%= turbo_stream.replace @tracking_point.date_time_point.to_date,
+                     partial: "status",
+                     locals: {
+                       tracking_point: @tracking_point,
+                     } %>
