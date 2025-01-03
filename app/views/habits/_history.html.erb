@@ -1,13 +1,18 @@
-<div>
+<div class="flex flex-col">
+  <div class="flex flex-row">
+    <%= link_to "Previous",
+    more_history_habit_path(end_date: 1.day.before(@history.first.date_time_point)) %>
+    <%= link_to "Next",
+    more_history_habit_path(start_date: 1.day.after(@history.last.date_time_point)) %>
+  </div>
   <div class="flex m-6">
-    <% @recent_history.each do |tracking_point| %>
+    <% @history.each do |tracking_point| %>
       <div class="flex flex-col grow place-items-center">
         <div>
           <%= tracking_point.date_time_point.to_date %>
         </div>
         <div>
           <%= render "status", tracking_point: tracking_point %>
-
         </div>
       </div>
     <% end %>

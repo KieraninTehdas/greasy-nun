@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :habits do
     member do
       post "cycle_status"
+      get "more_history"
     end
   end
 

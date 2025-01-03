@@ -1,5 +1,5 @@
 class HabitsController < ApplicationController
-  before_action :set_habit, only: %i[ show edit update destroy cycle_status ]
+  before_action :set_habit, only: %i[ show edit update destroy cycle_status more_history ]
 
   # GET /habits
   def index
@@ -9,7 +9,8 @@ class HabitsController < ApplicationController
 
   # GET /habits/1
   def show
-    @recent_history = @habit.history_between(7.days.ago, Date.today)
+    @history = @habit.history_between(7.days.ago, Date.today)
+    puts @history
   end
 
   # GET /habits/new
@@ -62,6 +63,24 @@ class HabitsController < ApplicationController
     end
   end
 
+  def more_history
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+
+    if start_date.present?
+      start_date = start_date.to_datetime()
+      @history = @habit.history_between(start_date, 7.days.after(start_date))
+    else
+      end_date = end_date.to_datetime()
+      @history = @habit.history_between(7.days.before(end_date), end_date)
+    end
+
+    respond_to do |format|
+      format.html { render :show }
+      format.turbo_stream
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_habit
@@ -72,4 +91,5 @@ class HabitsController < ApplicationController
     def habit_params
       params.require(:habit).permit(:name, :start)
     end
+
 end
