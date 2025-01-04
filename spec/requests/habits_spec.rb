@@ -147,8 +147,6 @@ RSpec.describe "/habits", type: :request do
     end
 
     context "when there is no data for tracking point" do
-      let(:tracking_points) { [] }
-
       it "creates a successful tracking point" do
         expect do
           post cycle_status_habit_url(habit), params: { date_time_point: }

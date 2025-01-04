@@ -32,6 +32,31 @@ RSpec.describe Habit, type: :model do
     end
   end
 
+  describe "#update_tracking_point_status" do
+    let(:habit)  { create(:habit) }
+    let(:date) { Date.today }
+
+    subject { habit.update_tracking_point_status(date, true) }
+
+    context "when tracking point doesn't exist" do
+      it "creates a tracking point" do
+        expect { subject }.to change(TrackingPoint, :count).by(1)
+      end
+
+      it "sets the correct status" do
+        expect(subject.succeeded?).to be true
+      end
+    end
+
+    context "when tracking point exists" do
+      let!(:tracking_point) { create(:tracking_point, habit: habit, date_time_point: date, succeeded: false) }
+
+      it "updates the status" do
+        expect(subject.succeeded?).to be true
+      end
+    end
+  end
+
   describe "#history_between" do
     before { travel_to Time.utc(2025, 1, 2, 23, 2) }
 

@@ -10,6 +10,12 @@ class Habit < ApplicationRecord
     !start?
   end
 
+  def update_tracking_point_status(date_point, new_status)
+    tracking_point = tracking_points.find_or_create_by(date_time_point: date_point)
+    tracking_point.update!(succeeded: new_status)
+    tracking_point
+  end
+
   def history_between(start_date, end_date)
     points = tracking_points.where("? <= date_time_point <= ?", start_date, end_date)
       .group(:date_time_point)
