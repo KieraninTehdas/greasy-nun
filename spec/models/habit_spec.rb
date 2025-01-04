@@ -32,11 +32,11 @@ RSpec.describe Habit, type: :model do
     end
   end
 
-  describe "#update_tracking_point_status" do
+  describe "#update_status_on_date" do
     let(:habit)  { create(:habit) }
     let(:date) { Date.today }
 
-    subject { habit.update_tracking_point_status(date, true) }
+    subject { habit.update_status_on_date(date, true) }
 
     context "when tracking point doesn't exist" do
       it "creates a tracking point" do
@@ -49,7 +49,7 @@ RSpec.describe Habit, type: :model do
     end
 
     context "when tracking point exists" do
-      let!(:tracking_point) { create(:tracking_point, habit: habit, date_time_point: date, succeeded: false) }
+      let!(:tracking_point) { create(:tracking_point, habit: habit, date_point: date, succeeded: false) }
 
       it "updates the status" do
         expect(subject.succeeded?).to be true
@@ -63,8 +63,8 @@ RSpec.describe Habit, type: :model do
     subject { habit.history_between(start_date, end_date) }
 
     let(:habit) { create(:habit) }
-    let(:start_date) { 7.days.ago }
-    let(:end_date) { DateTime.now }
+    let(:start_date) { 7.days.ago.to_date }
+    let(:end_date) { Date.today }
 
     context "when there are no tracking points" do
       it "returns a tracking point for each date in scope" do
