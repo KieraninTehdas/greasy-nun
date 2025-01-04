@@ -326,10 +326,10 @@ DEPENDENCIES
   brakeman
   cssbundling-rails
   debug
-  factory_bot_rails
+  factory_bot_rails (~> 6.4)
   inline_svg
   jsbundling-rails
-  overmind
+  overmind (~> 2.5)
   propshaft
   puma (>= 5.0)
   rails (~> 7.2.2)

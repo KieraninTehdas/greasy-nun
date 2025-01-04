@@ -48,12 +48,12 @@ group :development, :test do
 
   gem "rspec-rails", "~> 7.0.0"
 
-  gem "factory_bot_rails"
+  gem "factory_bot_rails", "~> 6.4"
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
-  gem "overmind"
+  gem "overmind", "~> 2.5"
 end

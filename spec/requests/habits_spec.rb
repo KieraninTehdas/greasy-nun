@@ -141,7 +141,7 @@ RSpec.describe "/habits", type: :request do
     end
 
     context "when updating to failed" do
-      let!(:tracking_point) { create(:tracking_point, habit:, succeeded: true, date_point:)}
+      let!(:tracking_point) { create(:tracking_point, habit:, succeeded: true, date_point:) }
 
       it "is updated to failed" do
         put update_status_on_date_habit_url(habit), params: { date_point:, succeeded: false }
@@ -152,7 +152,7 @@ RSpec.describe "/habits", type: :request do
     end
 
     context "when updating to succeeded" do
-      let!(:tracking_point) { create(:tracking_point, habit:, succeeded: false, date_point:)}
+      let!(:tracking_point) { create(:tracking_point, habit:, succeeded: false, date_point:) }
 
       it "is updated to succeeded" do
         put update_status_on_date_habit_url(habit), params: { date_point:, succeeded: true }
