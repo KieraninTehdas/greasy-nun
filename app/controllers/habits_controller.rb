@@ -10,7 +10,6 @@ class HabitsController < ApplicationController
   # GET /habits/1
   def show
     @history = @habit.history_between(7.days.ago, Date.today)
-    puts @history
   end
 
   # GET /habits/new

@@ -16,13 +16,9 @@ RSpec.describe "/habits", type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Habit. As you add validations to Habit, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) { { name: "Kick the Habit", start: false } }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:invalid_attributes) { { name: "", start: false } }
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -65,7 +61,7 @@ RSpec.describe "/habits", type: :request do
 
       it "redirects to the created habit" do
         post habits_url, params: { habit: valid_attributes }
-        expect(response).to redirect_to(habit_url(Habit.last))
+        expect(response).to redirect_to(habits_url)
       end
     end
 
@@ -125,6 +121,62 @@ RSpec.describe "/habits", type: :request do
       habit = Habit.create! valid_attributes
       delete habit_url(habit)
       expect(response).to redirect_to(habits_url)
+    end
+  end
+
+  describe "POST /cycle_status" do
+    let(:habit)  { create(:habit) }
+    let(:date_time_point) { Date.today }
+
+    context "when request format is html" do
+      it "redirects to the habit" do
+        post cycle_status_habit_url(habit), params: { date_time_point: }
+
+        expect(response).to redirect_to(habit)
+      end
+    end
+
+    context "when request format is turbo stream" do
+      xit "returns a turbo stream" do
+        headers = { "ACCEPT": "text/vnd.turbo-stream.html" }
+
+        post cycle_status_habit_url(habit), params: { date_time_point: }
+
+        expect(response.content_type).to eq("text/vnd.turbo-stream.html; charset=utf-8")
+      end
+    end
+
+    context "when there is no data for tracking point" do
+      let(:tracking_points) { [] }
+
+      it "creates a successful tracking point" do
+        expect do
+          post cycle_status_habit_url(habit), params: { date_time_point: }
+        end.to change(TrackingPoint, :count).by(1)
+        expect(TrackingPoint.last.succeeded?).to be true
+      end
+    end
+
+    context "when tracking point was successful" do
+      let!(:tracking_point) { create(:tracking_point, habit:, succeeded: true, date_time_point:)}
+
+      it "is updated to failed" do
+        post cycle_status_habit_url(habit), params: { date_time_point: }
+
+        tracking_point.reload
+        expect(tracking_point.succeeded?).to be false
+      end
+    end
+
+    context "when tracking point was failed" do
+      let!(:tracking_point) { create(:tracking_point, habit:, succeeded: false, date_time_point:)}
+
+      it "is updated to succeeded" do
+        post cycle_status_habit_url(habit), params: { date_time_point: }
+
+        tracking_point.reload
+        expect(tracking_point.succeeded?).to be true
+      end
     end
   end
 end
