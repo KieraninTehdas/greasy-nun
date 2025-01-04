@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe TrackingPoint, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#has_data" do
+    it "defaults to true" do
+      expect(TrackingPoint.new().has_data).to be true
+    end
+  end
 end
