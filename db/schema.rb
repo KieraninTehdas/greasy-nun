@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_27_220334) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_04_223728) do
   create_table "habits", force: :cascade do |t|
     t.string "name"
     t.boolean "start"
@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_27_220334) do
   end
 
   create_table "tracking_points", force: :cascade do |t|
-    t.datetime "date_time_point"
+    t.date "date_point"
     t.boolean "succeeded"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
