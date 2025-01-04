@@ -1,5 +1,5 @@
 class HabitsController < ApplicationController
-  before_action :set_habit, only: %i[ show edit update destroy cycle_status more_history ]
+  before_action :set_habit, only: %i[ show edit update destroy update_status_on_date more_history ]
 
   # GET /habits
   def index
@@ -9,7 +9,7 @@ class HabitsController < ApplicationController
 
   # GET /habits/1
   def show
-    @history = @habit.history_between(7.days.ago, Date.today)
+    @history = @habit.history_between(7.days.ago.to_date, Date.today)
   end
 
   # GET /habits/new
@@ -47,14 +47,8 @@ class HabitsController < ApplicationController
     redirect_to habits_url, notice: "Habit was successfully destroyed.", status: :see_other
   end
 
-  def cycle_status
-    @tracking_point = @habit.tracking_points.find_or_create_by(
-      date_time_point: params[:date_time_point].to_datetime
-    ) do |tracking_point|
-      tracking_point.succeeded = false
-    end
-
-    @tracking_point.update!(succeeded: !@tracking_point.succeeded?)
+  def update_status_on_date
+    @tracking_point = @habit.update_status_on_date(params[:date_point], params[:succeeded])
 
     respond_to do |format|
       format.html { redirect_to habit_path(@habit) }

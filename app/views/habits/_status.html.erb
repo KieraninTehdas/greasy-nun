@@ -1,5 +1,7 @@
-<%= turbo_frame_tag tracking_point.date_time_point.to_date do %>
-  <%= button_to cycle_status_habit_path(@habit), method: :post, params: { date_time_point: tracking_point.date_time_point.to_date } do %>
+<%= turbo_frame_tag tracking_point.date_point do %>
+  <%= button_to update_status_on_date_habit_url(@habit),
+    method: :put,
+    params: { date_point: tracking_point.date_point, succeeded: !tracking_point.succeeded? } do %>
     <%= render_icon(status_icon(tracking_point)) %>
   <% end %>
 <% end %>

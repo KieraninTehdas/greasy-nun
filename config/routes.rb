@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "tracking_points/update"
   resources :habits do
     member do
-      post "cycle_status"
+      put "status", :update_status_on_date
       get "more_history"
     end
   end
