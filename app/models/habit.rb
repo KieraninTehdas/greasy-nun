@@ -17,7 +17,7 @@ class Habit < ApplicationRecord
   end
 
   def history_between(start_date, end_date)
-    points = tracking_points.where("? <= date_point <= ?", start_date, end_date)
+    points = tracking_points.where("date_point BETWEEN ? AND ?", start_date, end_date)
       .group(:date_point)
       .each_with_object({}) do |tracking_point, hash|
         hash[tracking_point.date_point.to_date] = tracking_point

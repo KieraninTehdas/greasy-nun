@@ -75,5 +75,28 @@ RSpec.describe Habit, type: :model do
         expect(subject.map { |tp| tp.succeeded? }).to eq(Array.new(8, false))
       end
     end
+
+    context "when there are some tracking points in scope" do
+      let!(:out_of_scope_point) { create(:tracking_point, habit:, date_point: 9.days.ago.to_date, succeeded: true,) }
+      let!(:succeeded_point) { create(:tracking_point, habit:, date_point: 7.days.ago.to_date, succeeded: true) }
+      let!(:failed_point) { create(:tracking_point, habit:, date_point: Date.today, succeeded: false) }
+
+      it "fills the missing points with no data points" do
+        expect(subject.length).to eq(8)
+        expect(subject[3].has_data?).to be false
+      end
+
+      it "includes the in-scope tracking points" do
+        expect(subject).to include(succeeded_point, failed_point)
+      end
+
+      it "doesn't include out of scope tracking points" do
+        expect(subject).not_to include(out_of_scope_point)
+      end
+
+      it "sorts by date, ascending" do
+        expect(subject).to eq(subject.sort_by(&:date_point))
+      end
+    end
   end
 end
