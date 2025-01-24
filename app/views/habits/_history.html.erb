@@ -1,20 +1,32 @@
-<div class="flex flex-col">
-  <div class="flex flex-row">
-    <%= link_to "Previous",
-    more_history_habit_path(end_date: 1.day.before(@history.first.date_point)) %>
-    <%= link_to "Next",
-    more_history_habit_path(start_date: 1.day.after(@history.last.date_point)) %>
-  </div>
-  <div class="flex m-6">
-    <% @history.each do |tracking_point| %>
-      <div class="flex flex-col grow place-items-center">
-        <div>
-          <%= tracking_point.date_point.to_fs(:day_month_year) %>
+<%= turbo_frame_tag "history" do %>
+  <div class="flex flex-col">
+    <div class="flex flex-row">
+      <%= button_to "Previous",
+        more_history_habit_path,
+        params: { end_date: 1.day.before(@history.first.date_point) },
+        method: :get %>
+      <%= button_to "Next",
+        more_history_habit_path,
+        params: { start_date: 1.day.after(@history.last.date_point) },
+        method: :get,
+        disabled: @history.last.date_point.today? %>
+      <%= button_to "Today",
+        more_history_habit_path,
+        params: { end_date: Date.today },
+        method: :get
+        %>
+    </div>
+    <div class="flex m-6">
+      <% @history.each do |tracking_point| %>
+        <div class="flex flex-col grow place-items-center">
+          <div>
+            <%= tracking_point.date_point.to_fs(:day_month_year) %>
+          </div>
+          <div>
+            <%= render "status", tracking_point: tracking_point %>
+          </div>
         </div>
-        <div>
-          <%= render "status", tracking_point: tracking_point %>
-        </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>
