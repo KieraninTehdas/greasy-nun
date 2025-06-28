@@ -54,6 +54,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "bullet", group: "development"
 
   gem "overmind", "~> 2.5"
 end
