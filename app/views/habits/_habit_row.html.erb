@@ -1,0 +1,6 @@
+<tr>
+  <td><%= habit.name.downcase %></td>
+  <td><%= render "status", habit: habit, tracking_point: yesterday_data %></td>
+  <td><%= render "status", habit: habit, tracking_point: today_data %></td>
+  <td></td>
+</tr>

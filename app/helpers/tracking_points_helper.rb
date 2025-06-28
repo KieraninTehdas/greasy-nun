@@ -10,4 +10,8 @@ module TrackingPointsHelper
       "x"
     end
   end
+
+  def tracking_point_dom_id(tracking_point, habit_id)
+    "#{habit_id}-#{tracking_point.date_point}"
+  end
 end

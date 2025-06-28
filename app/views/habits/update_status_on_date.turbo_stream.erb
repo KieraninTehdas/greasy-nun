@@ -1,5 +1,6 @@
-<%= turbo_stream.replace @tracking_point.date_point,
+<%= turbo_stream.replace tracking_point_dom_id(@tracking_point, @habit.id),
                      partial: "status",
                      locals: {
                        tracking_point: @tracking_point,
+                       habit: @habit
                      } %>

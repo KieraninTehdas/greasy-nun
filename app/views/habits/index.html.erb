@@ -2,6 +2,38 @@
 
 <% content_for :title, "Habits" %>
 
+<div>
+  <h1>It's a great day to be better!</h1>
+
+  <table>
+    <tr>
+      <th>Habit</th>
+      <th>Yesterday</th>
+      <th>Today</th>
+      <th>Tomorrow</th>
+    </tr>
+
+    <tr><th colspan="4">I want to start</th></tr>
+
+    <% @good_habits.each do |habit| %>
+      <% habit_history = habit.history_between(Date.yesterday, Date.today) %>
+      <%= render "habit_row", habit: habit, yesterday_data: habit_history.first, today_data: habit_history.last %>
+    <% end %>
+
+    <tr><th colspan="4">I want to stop</th></tr>
+
+    <% @bad_habits.each do |habit| %>
+      <% habit_history = habit.history_between(Date.yesterday, Date.today) %>
+      <tr>
+        <td><%= habit.name.downcase %></td>
+        <td><%= render_icon(status_icon(habit_history.first)) %></td>
+        <td><%= render_icon(status_icon(habit_history.last))  %></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
 <h1>I want to</h1>
 
 <div id="habits" class="flex justify-evenly mx-5 sm:flex-row flex-col">
