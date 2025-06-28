@@ -1,6 +1,19 @@
 <%= turbo_frame_tag "history" do %>
   <div class="flex flex-col">
-    <div class="flex flex-row">
+    <div class="flex flex-col-reverse md:flex-row m-6">
+      <% @history.each do |tracking_point| %>
+        <div class="flex flex-col grow place-items-center">
+          <div>
+            <%= tracking_point.date_point.to_fs(:day_month_year) %>
+          </div>
+          <div>
+            <%= render "status", tracking_point: tracking_point %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="flex flex-row justify-around max-w-80 m-2">
       <%= button_to "Previous",
         more_history_habit_path,
         params: { end_date: 1.day.before(@history.first.date_point) },
@@ -15,18 +28,6 @@
         params: { end_date: Date.today },
         method: :get
         %>
-    </div>
-    <div class="flex m-6">
-      <% @history.each do |tracking_point| %>
-        <div class="flex flex-col grow place-items-center">
-          <div>
-            <%= tracking_point.date_point.to_fs(:day_month_year) %>
-          </div>
-          <div>
-            <%= render "status", tracking_point: tracking_point %>
-          </div>
-        </div>
-      <% end %>
     </div>
   </div>
 <% end %>
