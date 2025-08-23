@@ -33,6 +33,16 @@
   border-right: solid 1px grey;
 }
 
+.habit-list__content {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+
+  li {
+    padding: 0.5em 0 0.5em 0;
+  }
+}
+
 .habit-table {
   margin: 0 auto;
   table-layout: fixed;
