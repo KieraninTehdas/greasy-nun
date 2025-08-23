@@ -34,5 +34,17 @@
 }
 
 .habit-table {
-  margin-bottom: 1em;
+  margin: 0 auto;
+  table-layout: fixed;
+  width: 80%;
+  text-align: center;
+
+  th, td {
+    padding: 0.6em;
+  }
+}
+
+.habit-table__section-title {
+  text-align: center;
+  padding: 12px 0 12px 0;
 }
