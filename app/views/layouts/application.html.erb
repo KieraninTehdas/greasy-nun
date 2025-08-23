@@ -17,9 +17,24 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
+
   <body>
-    <div class="main-container">
-      <%= yield %>
-    </div>
+    <div id="root">
+      <header>
+        <nav class="navbar">
+          <div>
+            <ul class="navbar__items">
+              <li class="navbar__item">Home</li>
+              <li class="navbar__item">My Habits</li>
+              <li class="navbar__item">Insights</li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+        <main class="main-container">
+          <%= yield %>
+        </main>
+      </div>
   </body>
 </html>
