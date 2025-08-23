@@ -1,0 +1,23 @@
+<div class="habit-table--container">
+  <table class="habit-table">
+    <tr>
+      <th>Habit</th>
+      <th>Yesterday</th>
+      <th>Today</th>
+    </tr>
+
+    <tr><th class="habit-table__section-title" colspan="3">I want to start</th></tr>
+
+    <% @good_habits.each do |habit| %>
+      <% habit_history = habit.history_between(Date.yesterday, Date.today) %>
+      <%= render "habit_row", habit: habit, yesterday_data: habit_history.first, today_data: habit_history.last %>
+    <% end %>
+
+    <tr><th class="habit-table__section-title" colspan="3">I want to stop</th></tr>
+
+    <% @bad_habits.each do |habit| %>
+      <% habit_history = habit.history_between(Date.yesterday, Date.today) %>
+      <%= render "habit_row", habit: habit, yesterday_data: habit_history.first, today_data: habit_history.last %>
+    <% end %>
+  </table>
+</div>

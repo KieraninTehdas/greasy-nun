@@ -7,6 +7,11 @@ class HabitsController < ApplicationController
     @bad_habits = Habit.bad
   end
 
+  def tracker
+    @good_habits = Habit.good
+    @bad_habits = Habit.bad
+  end
+
   # GET /habits/1
   def show
     @history = @habit.history_between(7.days.ago.to_date, Date.today)

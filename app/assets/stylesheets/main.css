@@ -6,7 +6,7 @@ body {
 .main-container {
   display: flex;
   flex-direction: column;
-  font-family: helvetica sans-serif;
+  font-family: Helvetica sans-serif;
 }
 
 .navbar {
@@ -26,6 +26,18 @@ body {
   text-align: center;
   flex-grow: 1;
   padding: 8px;
+  :hover {
+    text-shadow: 4px 4px 5px black;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.0em;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .title {
@@ -35,7 +47,6 @@ body {
 .habit-list {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1em;
 }
 
 .habit-list__title {
@@ -66,6 +77,10 @@ body {
   li {
     padding: 0.5em 0 0.5em 0;
   }
+}
+
+.habit-table--container {
+  margin-top: 0.5em;
 }
 
 .habit-table {

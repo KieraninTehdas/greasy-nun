@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+  root "habits#tracker"
+
   get "tracking_points/new"
   get "tracking_points/create"
   get "tracking_points/edit"
   get "tracking_points/update"
+
+  get "tracker", to: "habits#tracker", as: "habit_tracker"
+
   resources :habits do
     member do
       put "status", :update_status_on_date
@@ -20,7 +25,4 @@ Rails.application.routes.draw do
   # Render dynamic PWA files from app/views/pwa/*
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end
