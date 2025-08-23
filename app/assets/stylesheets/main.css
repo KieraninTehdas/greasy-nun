@@ -1,0 +1,38 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  text-align: center;
+}
+
+.habit-list {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+.habit-list__title {
+  text-align: center;
+}
+
+.habit-list__row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+}
+
+
+.habit-list__container {
+  width: 50%;
+  text-align: center;
+}
+
+.habit-list__container:first-child {
+  border-right: solid 1px grey;
+}
+
+.habit-table {
+  margin-bottom: 1em;
+}

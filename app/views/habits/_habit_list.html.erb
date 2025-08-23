@@ -1,0 +1,12 @@
+<div class="habit-list__container">
+  <h2><%= list_title %></h2>
+  <div>
+    <% habits.each do |habit| %>
+      <div id="<%= dom_id habit %>">
+        <p>
+          <%= link_to habit.name.downcase, habit %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>

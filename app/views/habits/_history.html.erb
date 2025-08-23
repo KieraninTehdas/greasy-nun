@@ -7,7 +7,7 @@
             <%= tracking_point.date_point.to_fs(:day_month_year) %>
           </div>
           <div>
-            <%= render "status", tracking_point: tracking_point %>
+            <%= render "status", tracking_point: tracking_point, habit: habit %>
           </div>
         </div>
       <% end %>
